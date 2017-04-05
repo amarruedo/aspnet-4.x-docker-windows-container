@@ -1,9 +1,9 @@
 
 node('windows'){
-  
+
   deleteWorkspace()
   git changelog: false, poll: false, url: 'https://github.com/amarruedo/aspnet-4.x-docker-windows-container.git'
-  def environment  = docker.build "asp_net:build", "-f Dockerfile.build ."
+  def environment  = dockerExt.build "asp_net:build", "-f Dockerfile.build ."
   environment.inside ("${buildParams.dockerEnvs} ${dockerParams.runArgs}") {
 
     stage("Prepare"){
